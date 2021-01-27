@@ -301,7 +301,11 @@ const BaseMenu: React.FC<BaseMenuProps & PrivateSiderMenuProps> = (props) => {
       matchMenuKeys.join('-') !== (openKeys || []).join('-')
     ) {
       setOpenKeys(matchMenuKeys);
-    } else if (flatMenuKeys.length > 0) {
+    } else if (
+      // if in `defaultOpenAll` mode, no need to closeAll again
+      !defaultOpenAll &&
+      flatMenuKeys.length > 0
+    ) {
       setDefaultOpenAll(false);
     }
   }, [matchMenuKeys.join('-'), collapsed]);
